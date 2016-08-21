@@ -1,0 +1,39 @@
+%h1 予約詳細
+%table.table.table-bordered
+  %tr
+    %th 利用日
+    %td= @reservation.utilization_date
+  %tr
+    %th 利用時間
+    %td= @reservation.utilization_time.name
+  %tr
+    %th 団体名
+    %td= @reservation.group
+  %tr
+    %th 利用者名
+    %td= @reservation.username
+  %tr
+    %th 電話番号
+    %td= @reservation.tel
+  %tr
+    %th メールアドレス
+    %td= @reservation.email
+  %tr
+    %th 支払い方法
+    %td= @reservation.payment_method.name
+  %tr
+    %th 予約状態
+    %td= @reservation.status
+
+%h2 利用設備
+%table.table.table-bordered
+  - @equipments.each do |equipment|
+    %tr
+      %th= equipment.name
+      - if @reservation.use?(equipment)
+        %td 利用する
+      - else
+        %td
+
+.text-center
+  = link_to '編集', edit_reservation_path(@reservation), class: 'btn btn-success'

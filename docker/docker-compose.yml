@@ -1,7 +1,7 @@
 db:
   build: ./db
   environment:
-    MYSQL_ROOT_PASSWORD: yoyakuo_dev
+    MYSQL_ROOT_PASSWORD: yoyakuo
     MYSQL_HOST: ""
   mem_limit: 1000000000
   volumes:

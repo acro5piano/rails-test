@@ -1,1 +1,24 @@
-%h1 Listing Reservations
+%h1 予約一覧
+%table.table.table-bordered
+  %tr
+    %th 利用日
+    %th 利用時間
+    %th 団体名
+    %th 利用者名
+    %th 電話番号
+    %th メールアドレス
+    %th 支払い方法
+    %th 予約状態
+    %th 操作
+  - @reservations.each do |reservation|
+    %tr
+      %td= reservation.utilization_date
+      %td= reservation.utilization_time.name
+      %td= reservation.group
+      %td= reservation.username
+      %td= reservation.tel
+      %td= reservation.email
+      %td= reservation.payment_method.name
+      %td= reservation.status
+      %td
+        = link_to '編集', edit_reservation_path(reservation), class: 'btn btn-success'
