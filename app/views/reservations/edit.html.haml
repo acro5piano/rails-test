@@ -31,7 +31,8 @@
     - @equipments.each do |equipment|
       %tr
         %th= equipment.name
-        %td= select_tag "equipments[#{equipment.id}]", options_for_select([["利用しない", 0], ["利用する", 1]], 0)
+        - binding.pry
+        %td= select_tag "equipments[#{equipment.id}]", options_for_select([["利用しない", 0], ["利用する", 1]], @reserved_equipments.map(&:equipment_id).include?(equipment.id) ? 1 : 0 ), class: 'form-control'
 
   .text-center
     = link_to 'キャンセル', reservation_path(@reservation), class: 'btn btn-default'

@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @utilization_time = UtilizationTime.all
     @equipments = Equipment.all
-    @reservation.reservations_equipments.build
+    @reserved_equipments = @reservation.reservations_equipments.all
   end
 
   # get /reservations/new
@@ -34,8 +34,13 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     if @reservation.update_attributes(reservation_params)
-      # @reservation.reservations_equipments.all.map(&:destroy)
-      p params[:reservation][:reservations_equipments_attributes]
+      @reservation.reservations_equipments.all.map(&:destroy)
+      params[:equipments].each do |index, use|
+        if use == '1'
+          @reservation.reservations_equipments.build(reservation_id: @reservation.id,
+                                                       equipment_id: index).save
+        end
+      end
       flash[:success] = "予約を編集しました"
       redirect_to @reservation
     else
