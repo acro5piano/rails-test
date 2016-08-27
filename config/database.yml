@@ -1,16 +1,17 @@
 default: &default
-  adapter: mysql2
-  timeout: 5000
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   pool: 5
+  timeout: 5000
+  reconnect: false
 
+# Use docker in the development and test environment.
+# Specify docker-proxy use port 33333.
 development:
   <<: *default
   host: 127.0.0.1
-  username: root
-  password: yoyakuo
-  database: yoyakuo_dev
+  username: postgres
+  database: postgres
   port: 33333
 
 # Warning: The database defined as "test" will be erased and
@@ -19,11 +20,9 @@ development:
 test:
   <<: *default
   host: 127.0.0.1
-  username: root
-  password: yoyakuo
-  database: yoyakuo_test
+  username: postgres
+  database: postgres_test
   port: 33333
 
 production:
   <<: *default
-  database: yoyakuo

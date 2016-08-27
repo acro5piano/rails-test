@@ -13,45 +13,48 @@
 
 ActiveRecord::Schema.define(version: 20160821071756) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "equipment", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.integer  "price",           limit: 4
-    t.integer  "payment_type_id", limit: 1
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "name"
+    t.integer  "price"
+    t.integer  "payment_type_id", limit: 2
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.string   "group",               limit: 255
-    t.string   "username",            limit: 255,                   null: false
+    t.string   "group"
+    t.string   "username",                                       null: false
     t.string   "tel",                 limit: 20
-    t.string   "email",               limit: 255,                   null: false
-    t.text     "purpose",             limit: 65535,                 null: false
-    t.integer  "payment_method_id",   limit: 1,                     null: false
-    t.text     "remarks",             limit: 65535,                 null: false
-    t.date     "utilization_date",                                  null: false
-    t.integer  "utilization_time_id", limit: 1,                     null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.boolean  "disabled",            limit: 1,     default: false
+    t.string   "email",                                          null: false
+    t.text     "purpose",                                        null: false
+    t.integer  "payment_method_id",   limit: 2,                  null: false
+    t.text     "remarks",                                        null: false
+    t.date     "utilization_date",                               null: false
+    t.integer  "utilization_time_id", limit: 2,                  null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.boolean  "disabled",                       default: false
   end
 
   add_index "reservations", ["utilization_date"], name: "index_reservations_on_utilization_date", using: :btree
   add_index "reservations", ["utilization_time_id"], name: "index_reservations_on_utilization_time_id", using: :btree
 
   create_table "reservations_equipments", force: :cascade do |t|
-    t.integer  "reservation_id", limit: 4
-    t.integer  "equipment_id",   limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "reservation_id"
+    t.integer  "equipment_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "utilization_times", force: :cascade do |t|
-    t.string   "name",          limit: 255, null: false
-    t.integer  "price",         limit: 4,   null: false
-    t.integer  "holiday_price", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",          null: false
+    t.integer  "price",         null: false
+    t.integer  "holiday_price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

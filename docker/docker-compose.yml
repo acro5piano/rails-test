@@ -1,11 +1,7 @@
-db:
-  build: ./db
-  environment:
-    MYSQL_ROOT_PASSWORD: yoyakuo
-    MYSQL_HOST: ""
-  mem_limit: 1000000000
-  volumes:
-    - ./db/init.d:/docker-entrypoint-initdb.d
-  ports:
-    - "33333:3306"
+version: '2'
+services:
+  db:
+    image: postgres:9.5
+    ports:
+      - "33333:5432"
 

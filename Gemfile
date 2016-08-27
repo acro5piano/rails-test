@@ -7,9 +7,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 
 # Models
+gem 'pg', '0.18.4'
 gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate', '3.0.7'
-gem 'mysql2', '~> 0.3.20'
 gem 'seed-fu'
 gem 'active_hash'
 gem 'email_validator'
@@ -46,3 +46,6 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
 end
+
+gem 'rails_12factor', group: :production
+
