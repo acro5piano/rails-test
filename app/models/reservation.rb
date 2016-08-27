@@ -23,7 +23,4 @@ class Reservation < ActiveRecord::Base
       '有効'
     end
   end
-
-  def update_equipments
-  end
 end

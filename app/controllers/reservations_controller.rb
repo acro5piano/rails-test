@@ -37,8 +37,8 @@ class ReservationsController < ApplicationController
       @reservation.reservations_equipments.all.map(&:destroy)
       params[:equipments].each do |index, use|
         if use == '1'
-          @reservation.reservations_equipments.build(reservation_id: @reservation.id,
-                                                     equipment_id: index).save
+          ReservationsEquipment.create(reservation_id: @reservation.id,
+                                       equipment_id: index)
         end
       end
       flash[:success] = "予約を編集しました"
