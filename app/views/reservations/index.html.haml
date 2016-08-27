@@ -21,4 +21,5 @@
       %td= reservation.payment_method.name
       %td= reservation.status
       %td
+        = link_to '詳細', reservation_path(reservation), class: 'btn btn-default'
         = link_to '編集', edit_reservation_path(reservation), class: 'btn btn-success'

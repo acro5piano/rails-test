@@ -11,6 +11,7 @@ gem 'will_paginate', '3.0.7'
 gem 'mysql2', '~> 0.3.20'
 gem 'seed-fu'
 gem 'active_hash'
+gem 'email_validator'
 
 # Views
 gem 'haml-rails'

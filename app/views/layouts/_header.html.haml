@@ -1,10 +1,10 @@
 %header.navbar.navbar-top.navbar-inverse
   .container
-    = link_to "予約王 管理画面", root_path, id: "logo", class: 'navbar-brand'
+    = link_to '予約王 管理画面', root_path, id: 'logo', class: 'navbar-brand'
     %nav
       %ul.nav.navbar-nav.navbar-right
         %li= link_to '予約一覧', Reservation
         %li= link_to '予約カレンダー', '#'
-        %li= link_to '各種設定', '#'
+        %li= link_to '設定', '#'
         %li= link_to 'CSV出力', '#'
-        %li= link_to 'サイトを確認', '#'
+        %li= link_to 'サイトを確認', root_path

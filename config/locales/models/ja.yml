@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      reservations: 予約
+    attributes:
+      reservations:
+        id: ID
+        username: 利用者名
+        tel: 電話番号
+        email: メールアドレス
+        purpose: 利用目的
+        payment_method: 支払い方法
+        created_at: 登録日時
+        updated_at: 更新日時

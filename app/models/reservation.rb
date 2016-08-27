@@ -1,12 +1,19 @@
 class Reservation < ActiveRecord::Base
-  belongs_to_active_hash :payment_method
-  belongs_to :utilization_time
   has_many :reservations_equipments, dependent: :destroy
   has_many :equipments, through: :reservations_equipments
-  accepts_nested_attributes_for :reservations_equipments, allow_destroy: true
+  belongs_to_active_hash :payment_method
+  belongs_to :utilization_time
+
+  validates :username, presence: true
+  validates :tel, presence: true, length: { maximum: 20 }
+  validates :email, presence: true, email: true
+  validates :purpose, presence: true
+  validates :payment_method_id, presence: true, length: { maximum: 1 }
+  validates :utilization_date, presence: true
+  validates :utilization_time_id, presence: true, length: { maximum: 1 }
 
   def use?(equipment)
-    equipments.include? equipment
+    equipments.include?(equipment)
   end
 
   def status

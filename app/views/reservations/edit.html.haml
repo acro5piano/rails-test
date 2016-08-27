@@ -1,38 +1,41 @@
 %h1 予約編集
 = form_for @reservation  do |f|
+  = render 'shared/error_messages', object: f.object
   %table.table.table-bordered
     %tr
       %th 利用日
-      %td= f.text_field :utilization_date, type: 'date', class: 'form-control'
+      %td= f.text_field :utilization_date, type: 'date', class: 'form-control', required: true
     %tr
       %th 利用時間
-      %td= f.collection_select :utilization_time_id, @utilization_time, :id, :name, {}, {class: 'form-control'}
+      %td= f.collection_select :utilization_time_id, @utilization_time, :id, :name, {}, {class: 'form-control', required: true}
     %tr
       %th 団体名
       %td= f.text_field :group, class: 'form-control'
     %tr
       %th 利用者名
-      %td= f.text_field :username, class: 'form-control'
+      %td= f.text_field :username, class: 'form-control', required: true
     %tr
       %th 電話番号
-      %td= f.text_field :tel, class: 'form-control'
+      %td= f.text_field :tel, class: 'form-control', required: true
     %tr
       %th メールアドレス
-      %td= f.text_field :email, class: 'form-control'
+      %td= f.text_field :email, class: 'form-control', required: true
     %tr
       %th 支払い方法
-      %td= f.collection_select :payment_method_id, PaymentMethod.all, :id, :name, {}, {class: 'form-control'}
+      %td= f.collection_select :payment_method_id, PaymentMethod.all, :id, :name, {}, {class: 'form-control', required: true}
     %tr
       %th 予約状態
-      %td= f.select :disabled, {'有効' => false, '削除済み' => true}, {}, {class: 'form-control'}
+      %td= f.select :disabled, {'有効' => false, '削除済み' => true}, {}, {class: 'form-control', required: true}
 
   %h2 利用設備
   %table.table.table-bordered
     - @equipments.each do |equipment|
       %tr
         %th= equipment.name
-        - binding.pry
-        %td= select_tag "equipments[#{equipment.id}]", options_for_select([["利用しない", 0], ["利用する", 1]], @reserved_equipments.map(&:equipment_id).include?(equipment.id) ? 1 : 0 ), class: 'form-control'
+        %td= select_tag "equipments[#{equipment.id}]",
+          options_for_select([["利用しない", 0], ["利用する", 1]],
+                              @reservation.use?(equipment) ? 1 : 0),
+          class: 'form-control'
 
   .text-center
     = link_to 'キャンセル', reservation_path(@reservation), class: 'btn btn-default'

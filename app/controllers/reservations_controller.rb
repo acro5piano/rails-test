@@ -38,12 +38,14 @@ class ReservationsController < ApplicationController
       params[:equipments].each do |index, use|
         if use == '1'
           @reservation.reservations_equipments.build(reservation_id: @reservation.id,
-                                                       equipment_id: index).save
+                                                     equipment_id: index).save
         end
       end
       flash[:success] = "予約を編集しました"
       redirect_to @reservation
     else
+      @utilization_time = UtilizationTime.all
+      @equipments = Equipment.all
       render 'edit'
     end
   end
