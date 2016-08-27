@@ -23,9 +23,23 @@ describe ReservationsController, type: :controller do
     expect(response).to redirect_to root_path
   end
 
-  it "update a record" do
-    @reservation = create(:reservation)
-    patch :update, id: @reservation, reservation: attributes_for(:reservation), equipments: [1]
-    expect(response).to redirect_to reservation_path(@reservation)
+  describe '#update' do
+    context 'valid input' do
+      it "update a record" do
+        @reservation = create(:reservation)
+        patch :update, id: @reservation, reservation: attributes_for(:reservation), equipments: [1]
+        expect(response).to redirect_to reservation_path(@reservation)
+      end
+    end
+
+    context 'invalid input' do
+      it "doesn't update a record" do
+        @reservation = create(:reservation)
+        invalid_reservation_param = attributes_for(:reservation)
+        invalid_reservation_param[:username] = nil
+        patch :update, id: @reservation, reservation: invalid_reservation_param, equipments: [1]
+        expect(response).to render_template :edit, id: @reservation
+      end
+    end
   end
 end
