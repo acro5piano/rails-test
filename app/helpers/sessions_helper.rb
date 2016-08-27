@@ -1,5 +1,5 @@
 module SessionsHelper
   def logged_in?
-    true
+    false
   end
 end

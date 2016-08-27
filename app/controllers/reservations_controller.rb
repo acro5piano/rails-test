@@ -4,6 +4,11 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.all
   end
 
+  # get /reservations/new
+  def calendar
+    @reservations = Reservation.all
+  end
+
   # get /reservations/:id
   def show
     @reservation = Reservation.find(params[:id])
