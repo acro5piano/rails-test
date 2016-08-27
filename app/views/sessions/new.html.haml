@@ -1,2 +1,9 @@
-%h1 Sessions#new
-%p Find me in app/views/sessions/new.html.haml
+- provide :title, "ログイン"
+%h1 ログイン
+.row
+  .col-md-6.col-md-offset-3
+    = form_tag(login_path, method: 'post') do |f|
+      = label_tag :password
+      = password_field_tag :password, :password, class: 'form-control', required: true
+      .text-center
+        = submit_tag "ログイン", class: "btn btn-primary login__btn"

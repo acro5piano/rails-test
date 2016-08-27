@@ -5,6 +5,7 @@ ruby '2.3.0'
 gem 'rails', '4.2.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
+gem 'dotenv-rails'
 
 # Models
 gem 'pg', '0.18.4'

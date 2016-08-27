@@ -3,26 +3,25 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      if user.activated?
-        log_in user
-        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
-      else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
-        flash[:warning] = message
-        redirect_to root_url
-      end
+    @password = params[:password]
+    if @password && Digest::SHA2.hexdigest(@password) == ENV['ADMIN_PASSWORD_DIGEST']
+      session[:login] = true
+      flash.now[:success] = 'ログインしました'
+      redirect_to root_path
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalid password'
       render 'new'
     end
   end
 
   def destroy
-    log_out if logged_in?
+    session[:login] = false
     redirect_to root_url
+  end
+
+  def digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
   end
 end
