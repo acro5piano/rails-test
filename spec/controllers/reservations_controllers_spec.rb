@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe ReservationsController, type: :controller do
   before do
-    @reservation = create(:reservation)
     @equipment = create(:equipment)
-    @reservations_equipment = create(:reservations_equipment)
   end
 
   it 'renders template index' do
@@ -13,18 +11,20 @@ describe ReservationsController, type: :controller do
   end
 
   it "assigns Reservation in edit_reservation_path" do
+    @reservation = create(:reservation)
     get :edit, id: @reservation
     expect(assigns(:reservation)).to eq(@reservation)
   end
 
-  pending "save a record successfully" do
+  it "save a record successfully" do
     expect {
-      post :create, user: attributes_for(:reservation)
+      post :create, reservation: attributes_for(:reservation)
     }.to change(Reservation, :count).by(1)
-    expect(response).to redirect_to reservation_path(assigns([:reservation]))
+    expect(response).to redirect_to root_path
   end
 
   it "update a record" do
+    @reservation = create(:reservation)
     patch :update, id: @reservation, reservation: attributes_for(:reservation), equipments: [1]
     expect(response).to redirect_to reservation_path(@reservation)
   end

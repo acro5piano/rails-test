@@ -41,10 +41,11 @@ describe Reservation, type: :model do
 
     required_attributes.each do |attr|
       context "when #{attr} is blank" do
-        it do
+        before do
           @reservation[attr] = ''
-          is_expected.to be false
         end
+        it { is_expected.to be false }
+        example { expect{ @reservation.save! }.to raise_error(ActiveRecord::RecordInvalid) }
       end
     end
 
