@@ -30,10 +30,10 @@ class ReservationsController < ApplicationController
   def destroy
   end
 
-  # put /reservations
+  # patch /reservations/:id
   def update
     @reservation = Reservation.find(params[:id])
-    if @reservation.update_attributes(reservation_params)
+    if @reservation.update(reservation_params)
       @reservation.reservations_equipments.all.map(&:destroy)
       params[:equipments].each do |index, use|
         if use == '1'
@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
 
   private
     def reservation_params
-      params.require(:reservation).permit(:utilization_date, :utilization_time_id, :group, :username, :tel,
-                                          :email, :payment_method_id, :disabled)
+      params.require(:reservation).permit(:group, :username, :tel, :email, :payment_method_id, :disabled,
+                                          :utilization_date, :utilization_time_id)
     end
 end
