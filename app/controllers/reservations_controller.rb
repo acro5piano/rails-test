@@ -7,6 +7,11 @@ class ReservationsController < ApplicationController
   # get /reservations/new
   def calendar
     @reservations = Reservation.all
+    calendar = Calendar::Base.new
+    @calendar_table = calendar.table do
+      'aaa'
+    end
+    @calendar_header = calendar.header
   end
 
   # get /reservations/:id
