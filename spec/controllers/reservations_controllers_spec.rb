@@ -6,6 +6,7 @@ describe ReservationsController, type: :controller do
   end
 
   it 'renders template index' do
+    log_in
     get :index
     expect(response).to render_template :index
   end

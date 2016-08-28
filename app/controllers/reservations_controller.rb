@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :edit, :show, :update]
+
   # get /reservations
   def index
     @reservations = Reservation.all
@@ -7,7 +9,7 @@ class ReservationsController < ApplicationController
   # get /reservations/new
   def calendar
     @reservations = Reservation.all
-    calendar = Calendar::Base.new
+    calendar = Calendar.new
     @calendar_table = calendar.table do |day|
       day.to_s + 'aaabc'
     end
@@ -45,10 +47,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # delete /reservations/:id
-  def destroy
-  end
-
   # patch /reservations/:id
   def update
     @reservation = Reservation.find(params[:id])
@@ -76,5 +74,9 @@ class ReservationsController < ApplicationController
     def reservation_params
       params.require(:reservation).permit(:group, :username, :tel, :email, :payment_method_id, :disabled,
                                           :purpose, :remarks, :utilization_date, :utilization_time_id)
+    end
+
+    def logged_in_user
+      redirect_to login_path if !session[:login]
     end
 end

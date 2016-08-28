@@ -1,9 +1,9 @@
-# TODO: Railsを再起動すると設定が消えてしまうので、どうにかすること
-
-Calendar.configure do |config|
-  config.class_sunday = 'bg-danger'
-  config.class_saturday = 'bg-info'
-  config.class_header = 'text-center'
-  config.use_twitter_bootstrap = true
-  config.weekdays = ['日','月','火','水','木','金','土']
-end
+Rails.application.config.calendar_class_sunday = 'bg-danger'
+Rails.application.config.calendar_class_monday = 'calendar__monday'
+Rails.application.config.calendar_class_tuesday = 'calendar__tuesday'
+Rails.application.config.calendar_class_wednesday = 'calendar__wednesday'
+Rails.application.config.calendar_class_thursday = 'calendar__thursday'
+Rails.application.config.calendar_class_friday = 'calendar__friday'
+Rails.application.config.calendar_class_saturday = 'bg-info'
+Rails.application.config.calendar_class_header = 'text-center'
+Rails.application.config.calendar_weekdays = ['日','月','火','水','木','金','土']
