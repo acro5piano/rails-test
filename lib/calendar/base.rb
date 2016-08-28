@@ -48,7 +48,7 @@ module Calendar
       table
     end
 
-    def htmlize(day, content: '')
+    def htmlize(day: nil, wday: nil, content: '')
       wday ||= Date.new(@year, @month, day).wday
 
       case wday
