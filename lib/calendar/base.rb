@@ -21,7 +21,8 @@ module Calendar
 
       # Set content
       1.upto(last_day) do |day|
-        table.push htmlize(day: day, content: day)
+        content = yield(day)
+        table.push htmlize(day: day, content: content)
       end
 
       # Fill in blanks

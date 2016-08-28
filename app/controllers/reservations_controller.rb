@@ -8,8 +8,8 @@ class ReservationsController < ApplicationController
   def calendar
     @reservations = Reservation.all
     calendar = Calendar::Base.new
-    @calendar_table = calendar.table do
-      'aaa'
+    @calendar_table = calendar.table do |day|
+      day.to_s + 'aaabc'
     end
     @calendar_header = calendar.header
   end

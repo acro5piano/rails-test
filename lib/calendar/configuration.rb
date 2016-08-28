@@ -1,17 +1,17 @@
 module Calendar
   class Configuration
     def initialize
-      @class_sunday ||= 'calendar__sunday'
-      @class_monday ||= 'calendar__monday'
-      @class_tuesday ||= 'calendar__tuesday'
-      @class_wednesday ||= 'calendar__wednesday'
-      @class_thursday ||= 'calendar__thursday'
-      @class_friday ||= 'calendar__friday'
-      @class_saturday ||= 'calendar__saturday'
+      @class_sunday ||= 'calendar__sunday'.freeze
+      @class_monday ||= 'calendar__monday'.freeze
+      @class_tuesday ||= 'calendar__tuesday'.freeze
+      @class_wednesday ||= 'calendar__wednesday'.freeze
+      @class_thursday ||= 'calendar__thursday'.freeze
+      @class_friday ||= 'calendar__friday'.freeze
+      @class_saturday ||= 'calendar__saturday'.freeze
 
       if @use_twitter_bootstrap
-        @class_sunday = 'calendar__sunday bg-danger'
-        @class_saturday = 'calendar__saturday bg-info'
+        @class_sunday = 'calendar__sunday bg-danger'.freeze
+        @class_saturday = 'calendar__saturday bg-info'.freeze
       end
     end
 
@@ -24,7 +24,7 @@ module Calendar
       end
 
       define_method(attr.to_s + '=') do |value|
-        instance_variable_set "@#{attr}".to_sym, value
+        instance_variable_set "@#{attr}".to_sym, value.freeze
       end
     end
   end
