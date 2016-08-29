@@ -1,5 +1,7 @@
 - provide(:title, '予約一覧')
 %h1 予約一覧
+
 %table.table.table-bordered
-  = @calendar_header.html_safe
-  = @calendar_table.html_safe
+  = calendar_header
+  = calendar_for(2016, 8) do |day|
+    - link_to day, 'aaa.com'
