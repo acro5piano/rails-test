@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-ruby '2.3.0'
+source 'http://rubygems.org'
+ruby '2.3.1'
 
 # General
 gem 'rails', '4.2.2'
