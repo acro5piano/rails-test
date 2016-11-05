@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 ruby '2.3.1'
 
 # General
@@ -26,6 +26,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass',       '3.2.0.0'
 
@@ -38,11 +39,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-doc'
-  gem 'pry-byebug'
-  gem 'pry-stack_explorer'
-  gem 'byebug',      '3.4.0'
-
-  gem 'spring',      '1.1.3'
 
   gem 'rspec-rails', '~> 3.5'
   gem "factory_girl_rails", "~> 4.0"
@@ -50,4 +46,3 @@ group :development, :test do
 end
 
 gem 'rails_12factor', group: :production
-

@@ -9,7 +9,6 @@ class ReservationsController < ApplicationController
   # get /reservations/new
   def calendar
     @reservations = Reservation.all
-    @calendar = Calendar.new
     # @calendar_table = calendar.table do |day|
     #   day.to_s + 'aaabc'
     # end
