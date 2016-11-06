@@ -1,18 +1,23 @@
 - provide(:title, '予約一覧')
 %h1 予約一覧
 
-%table.table.table-bordered
-  %tr
-    %td.bg-danger= t('sunday')
-    %td= t('monday')
-    %td= t('tuesday')
-    %td= t('wednesday')
-    %td= t('thursday')
-    %td= t('friday')
-    %td.bg-info= t('saturday')
+= form_tag do |f|
+  = hidden_field_tag :year, @year
+  = hidden_field_tag :year, @month
+  %table.table.table-bordered
+    %tr
+      %td.bg-danger= t('sunday')
+      %td= t('monday')
+      %td= t('tuesday')
+      %td= t('wednesday')
+      %td= t('thursday')
+      %td= t('friday')
+      %td.bg-info= t('saturday')
 
-  = calendar_for(@year, @month) do |day|
-    - if @reservations_dates.include? Date.new(@year, @month, day)
-      - link_to day, 'aaa.com'
-    - else
-      - day
+    = calendar_for(@year, @month) do |day|
+      - if @reservations_dates.include? Date.new(@year, @month, day)
+        - '<span class="bg-danger">x</a>'
+      - else
+        - check_box_tag 'reserve[%s][]' % day
+
+  = Reservation.monthly_schedule(@year, @month)

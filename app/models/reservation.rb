@@ -24,4 +24,15 @@ class Reservation < ActiveRecord::Base
       '有効'
     end
   end
+
+  def self.monthly_schedule(year, month)
+    schedule = {}
+    1.upto(31) do |day|
+      schedule[day] = {
+        1 => 0,
+        2 => 1
+      }
+    end
+    schedule
+  end
 end
