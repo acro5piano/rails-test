@@ -6,13 +6,10 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.all
   end
 
-  # get /reservations/new
   def calendar
-    @reservations = Reservation.all
-    # @calendar_table = calendar.table do |day|
-    #   day.to_s + 'aaabc'
-    # end
-    # @calendar_header = calendar.header
+    @year = params[:year]? params[:year].to_i : Date.today.year
+    @month = params[:month]? params[:month].to_i : Date.today.month
+    @reservations_dates = Reservation.pluck(:utilization_date)
   end
 
   # get /reservations/:id
@@ -41,7 +38,6 @@ class ReservationsController < ApplicationController
       flash[:info] = "予約しました"
       redirect_to root_path
     else
-      binding.pry
       render 'new'
     end
   end
@@ -71,8 +67,9 @@ class ReservationsController < ApplicationController
 
   private
     def reservation_params
-      params.require(:reservation).permit(:group, :username, :tel, :email, :payment_method_id, :disabled,
-                                          :purpose, :remarks, :utilization_date, :utilization_time_id)
+      params.require(:reservation).permit(
+        :group, :username, :tel, :email, :payment_method_id, :disabled,
+        :purpose, :remarks, :utilization_date, :utilization_time_id)
     end
 
     def logged_in_user

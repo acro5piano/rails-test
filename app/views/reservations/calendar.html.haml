@@ -2,3 +2,17 @@
 %h1 予約一覧
 
 %table.table.table-bordered
+  %tr
+    %td.bg-danger= t('sunday')
+    %td= t('monday')
+    %td= t('tuesday')
+    %td= t('wednesday')
+    %td= t('thursday')
+    %td= t('friday')
+    %td.bg-info= t('saturday')
+
+  = calendar_for(@year, @month) do |day|
+    - if @reservations_dates.include? Date.new(@year, @month, day)
+      - link_to day, 'aaa.com'
+    - else
+      - day

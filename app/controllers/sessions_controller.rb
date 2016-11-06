@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     @password = params[:password]
     if @password && Digest::SHA2.hexdigest(@password) == ENV['ADMIN_PASSWORD_DIGEST']
       session[:login] = true
-      flash.now[:success] = 'ログインしました'
+      flash[:success] = 'ログインしました'
       redirect_to root_path
     else
       flash.now[:danger] = 'パスワードが異なります'
@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:login] = false
+    flash[:success] = 'ログアウトしました'
     redirect_to root_url
   end
 

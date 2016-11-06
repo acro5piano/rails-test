@@ -3,11 +3,12 @@
     .container
       = link_to '予約王', root_path, id: 'logo', class: 'navbar-brand'
       %nav
-        %ul.nav.navbar-nav.navbar-right
-          %li= link_to '予約一覧', reservations_path
-          %li= link_to 'CSV出力', '#'
-          %li= link_to '設定', '#'
-          %li= link_to 'ログアウト', logout_path
+        - if logged_in?
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to '予約一覧', reservations_path
+            %li= link_to 'CSV出力', '#'
+            %li= link_to '設定', '#'
+            %li= link_to 'ログアウト', logout_path
 - else
   %header.navbar.navbar-top.navbar-inverse
     .container

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :reservations
   root 'reservations#calendar'
+  get 'calendar/:year/:month' => 'reservations#calendar'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'

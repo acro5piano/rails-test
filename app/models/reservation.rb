@@ -3,6 +3,7 @@ class Reservation < ActiveRecord::Base
   has_many :equipments, through: :reservations_equipments
   belongs_to_active_hash :payment_method
   belongs_to :utilization_time
+  accepts_nested_attributes_for :equipments
 
   validates :username, presence: true
   validates :tel, presence: true, length: { maximum: 20 }
